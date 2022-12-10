@@ -26,43 +26,57 @@
             <div class="col-sm-12">
               <div class="card">
                 <div class="card-body">
-                  <form action="/grade/add-grade" method="post">
+                  <form action="/add-grade" method="post">
                     <div class="row">
                       <div class="col-12 col-sm-6">
                         <div class="form-group">
                           <label>Tên Sinh Viên</label>
-                          <input name="nameStudent" type="text" class="form-control" />
+                          <select name="nameStudent" class="form-control form-select" aria-label="Default select example">
+                            <% students.forEach(function(item) { %>
+                              <option  value="<%= item.name %>"><%= item.name %></option>
+                              <% }); %>
+                          </select>
                         </div>
+                        <div class="form-group">
+                          <label>ID Sinh Viên </label>
+                          <input name="studentId" type="text" class="form-control" onKeyDown="limitText(this,5);" 
+                          onKeyUp="limitText(this,5);"/>                    
+                        </div>
+                      </div>
+                      <div class="col-12 col-sm-6">
                         <div class="form-group">
                           <label>Mã Môn Học</label>
-                          <input name="monHocId" type="text" class="form-control" />
+                          <select name="monHocId" class="form-control form-select" aria-label="Default select example">
+                            <% cousers.forEach(function(item) { %>
+                              <option  value="<%= item.couserId %>"><%= item.couserId %></option>
+                              <% }); %>
+                          </select>
                         </div>
                       </div>
-                      <div class="col-12 col-sm-6">
-                        <div class="form-group">
-                          <label>Mã Sinh Viên</label>
-                          <input name="studentId" type="text" class="form-control" />
-                        </div>
-                      </div>
-                      <div class="col-12 col-sm-6">
+                      <div class="row">
+
+                      <div class="col-sm">
                         <div class="form-group">
                           <label>Điểm Chuyên Cần</label>
-                          <input name="diemChuyenCan" type="number" class="form-control" />
+                          <input name="diemChuyenCan" type="number" class="form-control" onKeyDown="limitText(this,2);" 
+                          onKeyUp="limitText(this,2);" />
                         </div>
                       </div>
-                      <div class="col-12 col-sm-6">
+                      <div class="col-sm">
                         <div class="form-group">
                           <label>Điểm Thực Hành</label>
-                          <input name="diemThucHanh" type="number" class="form-control" />
+                          <input name="diemThucHanh" type="number" class="form-control" onKeyDown="limitText(this,2);" 
+                          onKeyUp="limitText(this,2);" />
                         </div>
                       </div>
-                      <div class="col-12 col-sm-6">
+                      <div class="col-sm">
                         <div class="form-group">
                           <label>Điểm Cuối Kỳ</label>
-                          <input name="diemCuoiKy" type="number" class="form-control" />
+                          <input name="diemCuoiKy" type="number" class="form-control" onKeyDown="limitText(this,2);" 
+                          onKeyUp="limitText(this,2);" />
                         </div>
-                      </div>
-                      
+                      </div>  
+                    </div>
                       <div class="col-12">
                         <button type="submit" class="btn btn-primary">
                           Submit
@@ -80,3 +94,13 @@
       <%- include('../includes/footer') -%>
 </body>
 </html>
+<script language="javascript" type="text/javascript">
+  
+  function limitText(limitField, limitNum) {
+    var messages = "Thông tin chỉ chứa "+ limitNum + " ký tự"
+      if (limitField.value.length > limitNum) {
+          limitField.value = limitField.value.substring(0, limitNum);
+          alert(messages);
+      }
+  }
+  </script>

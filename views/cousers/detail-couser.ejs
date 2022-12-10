@@ -24,13 +24,13 @@
          <!-- Main jumbotron for a primary marketing message or call to action -->
          <div class="card mb-3">
           <form method="POST">
-          <img class="card-img-top" src="https://upload.wikimedia.org/wikipedia/vi/a/a7/Nodejs_logo_light.png" alt="Card image cap">
+          <img width="300px"  height="300px" , class="card-img-top" src="<%=couserData.image%>" alt="Card image cap">
           <div class="card-body">
-            <h5 class="card-title font-weight-bold">Môn Học: <%- couserData.name %></h5>
+            <h5 class="text-success card-title font-weight-bold">Môn Học: <%- couserData.name %></h5>
             <h5 class="card-title font-weight-bold">  Giáo Viên Giảng Dạy : <%- couserData.teacherName%></h5>
             <p class="card-text">Mô Tả : <%- couserData.des %></p>
-            <p class="card-text"><small class="text-muted"> ID <%- couserData._id %></small></p>
-            <li><a href="/grade">Danh sách điểm</a></li>
+            <p class="card-text"><small class="text-muted"> ID <%- couserData.couserId %></small></p>
+            <a style="font-size:larger;" href="/grade/<%= couserData.couserId %>"><i class="fa fa-graduation-cap" aria-hidden="true"></i>  Danh sách điểm</a>
           </div>
         </form>
         </div>

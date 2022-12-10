@@ -5,10 +5,11 @@ var couserController = require('../controller/couser.controller');
 
 
 router.get('/cousers', couserController.getCousers);
+// Create 
 router.get('/couser/add-couser', couserController.getCouserCreate);
 router.post('/couser/add-couser', couserController.postCouserCreate);
 // Detail 
-router.get('/couser/detail/:id' ,couserController.getCouserDetail);
+router.get('/couser/detail/:couserId' ,couserController.getCouserDetail);
 
 // Update 
 router.get('/couser/update-couser/:id', couserController.getCouserUpdate);

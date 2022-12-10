@@ -4,24 +4,16 @@ var mongoose = require('mongoose');
 
 var courseSchema = mongoose.Schema (
     {   
-        couserId: {
-            type : String ,
-            require: true 
-        },
-        name : {
-            type: String,
-            require: true
-        },
-        teacherName : {
-            type: String ,
-            require : true  
-        },
-        des : {
-            type: String ,
-            require: true
-        } 
-});
-var CousersList = module.exports = mongoose.model('Cousers', courseSchema);
+        couserId: String ,
+        name: String,
+        teacherName: String,
+        des: String,
+        image : String ,
+        isDeleted: false,
+    }
+  );
+
+var CousersModel = module.exports = mongoose.model('Cousers', courseSchema);
 module.exports.get = function(callback, limit){
-    CousersList.find(callback).limit(limit);
+    CousersModel.find(callback).limit(limit);
 }

@@ -1,6 +1,7 @@
 const CousersList = require( "../models/course.model");
 
 exports.getCousers = (req , res ) => {
+    
     CousersList.get(function(err , couserData) {
         if(err){
             console.log('co loi xay ra');
@@ -13,6 +14,7 @@ exports.getCousers = (req , res ) => {
 }
 // CREATE 
 exports.getCouserCreate = (req , res ) => {
+    
     res.render('./cousers/add-couser');
 }
 exports.postCouserCreate = (req , res ) => {
@@ -21,6 +23,8 @@ exports.postCouserCreate = (req , res ) => {
     couserData.name = req.body.name ;
     couserData.teacherName = req.body.teacherName;
     couserData.des = req.body.des;
+    couserData.image = req.body.image ;
+    couserData.isDeleted = false ;
     couserData.save(function (err) {
         console.log (err);
         res.redirect('/cousers')
@@ -28,10 +32,12 @@ exports.postCouserCreate = (req , res ) => {
 }
 // DETAIL 
 exports.getCouserDetail = (req , res) => {
-    const ID = req.params.id;
-    CousersList.findById(ID , function (err , dataCouser){
+    const ID = req.params.couserId;
+    console.log(ID);
+    CousersList.findOne({couserId:ID} , function (err , dataCouser){
         res.render('./cousers/detail-couser' , {couserData : dataCouser});
     });
+    
 }
 // UPDATE 
 exports.getCouserUpdate = (req , res ) => {
@@ -73,4 +79,4 @@ exports.postDelete = (req , res) => {
             res.redirect('/cousers');
          
     });
-}
+};

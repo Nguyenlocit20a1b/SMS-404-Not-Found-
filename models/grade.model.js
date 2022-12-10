@@ -39,7 +39,9 @@ var gradeSchema = mongoose.Schema (
         
 });
 
-var GradeList = module.exports = mongoose.model('Grade', gradeSchema);
-module.exports.get = function(callback, limit){
-    GradeList.find(callback).limit(limit);
-}
+// var GradeList = module.exports = mongoose.model('Grade', gradeSchema);
+// module.exports.get = function(callback, limit){
+//     GradeList.find(callback).limit(limit);
+// }
+
+module.exports = mongoose.model('Grade', gradeSchema);
