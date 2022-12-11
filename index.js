@@ -5,10 +5,13 @@ const path = require('path');
 var cookieParser = require('cookie-parser');
 let mongoose = require('mongoose');
 var logger = require('morgan');
-
+var bodyParser = require('body-parser');
+var urlencodedParser = bodyParser.urlencoded({ extended: false });
 const app = express();
+var cookieParser = require('cookie-parser')
+const jwt = require('jsonwebtoken')
 
-
+app.use(cookieParser())
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -21,6 +24,36 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use("/", require('./routes'));
+app.use("/", require('./routes/student.routes'));
+app.use("/", require('./routes/class.routes'));
+app.use("/", require('./routes/department.routes'));
+app.use('/', require('./routes/users.routes'));
+app.use('/', require('./routes/course.routes'));
+//HAHA
+// parse application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: false }))
+
+// parse application/json
+app.use(bodyParser.json())
+
+
+app.get('/home', (req, res, next) => {
+  try {
+    const token = req.cookies.token
+    var ketqua = jwt.verify(token, 'loy') 
+    if (ketqua) {
+      next()
+    }
+  } catch (error) {
+    return res.redirect('/login')
+  }
+}, (req, res, next) => {
+  return res.render('./index')
+})
+
+//HAHA
+
+
 
 
 // catch 404 and forward to error handler
@@ -29,7 +62,7 @@ app.use(function(req, res, next) {
   });
   
   /* ket noi voi database */
-  mongoose.connect('mongodb://localhost:27017/student_manager', { useNewUrlParser: true, autoIndex: false });
+  mongoose.connect('mongodb://127.0.0.1:27017/student_manager', { useNewUrlParser: true });
   var db = mongoose.connection;
   if(!db){
     console.log("database khong ket noi duoc");

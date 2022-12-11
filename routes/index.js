@@ -1,9 +1,10 @@
 var express = require('express');
 var router = express.Router();
-var controller = require('../controller/index')
+var controller = require('../controller/index');
+const { verifyToken, verifyAdmin } = require('../middleware/auth.middleware');
 
 
-router.get('/', controller.index);
+router.get('/', verifyAdmin, controller.index);
 
 
 
